@@ -278,23 +278,39 @@ output_path = Path("inexpensive_loans.csv")
 # Write my list of inexpensive loans to inexpensive_loans.csv
 
 print("Writing inexpensive_loans.csv")
+# Opening a file at our current directory with the name specified
+# 'w' indicates writing
+# newline='' is specified for file objects
 with open(output_path, 'w', newline='') as csv_file:
+
+	# creating a DictWriter because inexpensive_loans is a dictionary
 	writer = csv.DictWriter(csv_file, fieldnames=header)
 
+	# writing the header as specified
 	print(f"Writing the header {header}")
 	writer.writeheader()
+
+	# writing each loan to the file
 	print("Writing each loan")
+	# iterating through the inexpensive loan list
 	for loan in inexpensive_loans:
 		print(f"Writing this loan: {loan}")
+		# since our writer is a DictWriter it handles things for us
 		writer.writerow(loan)
-print()
 
+print()
 print("Reading inexpensive_loans.csv")
+# Opnening our newly written file in our current working directory to confirm it's contents
 with open(output_path, newline='') as csv_file:
+
+	# creating a DictReader to iterate our dictionary -based CSV data
 	reader = csv.DictReader(csv_file)
+
+	# what are those field names?
 	print(reader.fieldnames)
+
+	# iterating through the reader, printing each row of data after the field headers
 	for row in reader:
-		#print(row[header[0]], row[header[1]], row[header[2]], row[header[3]])
 		print(row)
 
 
